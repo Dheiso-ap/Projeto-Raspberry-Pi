@@ -9,7 +9,7 @@ import java.net.Socket;
  * @author dheiso
  */
 /*
-    Esta parte do código, representa uma servidor para guardar os estados dos dispositivos ativos.
+    Esta parte do código, representa uma servidor multithread para atender diversar solicitações, referentes a instancias do middlware e suas respectivas aplicações.
 */
 public class Servidor {
 
