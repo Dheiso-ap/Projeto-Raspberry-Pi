@@ -3,7 +3,7 @@ package ServidorEstados;
 
 /**
  *
- * @author iron-nigga
+ * @author Dheiso
  */
 public class ServidorDadosHandoff {
     
