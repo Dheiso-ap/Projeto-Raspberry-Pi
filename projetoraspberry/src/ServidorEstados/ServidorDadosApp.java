@@ -5,6 +5,7 @@ package ServidorEstados;
  *
  * @author Dheiso
  */
+/*Esta classe serve para instanciar objetos responsaveis por guardar as informações referentes a uma aplicação*/
 public class ServidorDadosApp {
     
     private String estado;
@@ -36,7 +37,7 @@ public class ServidorDadosApp {
     }
     
     
-    public void deserializar(String linha){
+    public void deserializar(String linha){//Este metodo recebe uma string e separa as informações e coloca as informações nos atributos referentes a essa classe.
         String vetor[] = linha.split(";");
         
         this.tipoId = Integer.parseInt(vetor[0]);
