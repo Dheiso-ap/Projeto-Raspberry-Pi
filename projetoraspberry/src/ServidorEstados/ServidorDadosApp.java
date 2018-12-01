@@ -5,7 +5,9 @@ package ServidorEstados;
  *
  * @author Dheiso
  */
-/*Esta classe serve para instanciar objetos responsaveis por guardar as informações referentes a uma aplicação*/
+/*Esta classe serve para instanciar objetos responsaveis por guardar as informações referentes a uma aplicação
+que por sua vez ficam guardados em um registro do middleware.
+*/
 public class ServidorDadosApp {
     
     private String estado;
