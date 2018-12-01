@@ -5,12 +5,14 @@ package ServidorEstados;
  * @author dheiso
  */
 import java.util.ArrayList;
-
+/*esta classe é usada para instanciar um objeto responsável por guardar os registros de cada instancia de middleware,
+e também registros das aplicações que são intermediadas 
+*/
 public class ServidorRegistro {
 
-    private ArrayList<ServidorDadosMD> istanciasMD = new ArrayList<>();
+    private ArrayList<ServidorDadosMD> istanciasMD = new ArrayList<>();//lista de instancias do middleware
 
-    public void addMD(ServidorDadosMD MD) {
+    public void addMD(ServidorDadosMD MD) {//adiciona uma instancia do middleware, verifica se a instancia j está registrada
 
         boolean test = true;
 
@@ -26,7 +28,7 @@ public class ServidorRegistro {
         }
     }
     
-    public void removerMD(ServidorDadosMD MD) {
+    public void removerMD(ServidorDadosMD MD) {//remove uma instancia do middlware 
         
         
         
@@ -39,7 +41,7 @@ public class ServidorRegistro {
 
     }
 
-    public void addApp(ServidorDadosMD MD, ServidorDadosApp app) {
+    public void addApp(ServidorDadosMD MD, ServidorDadosApp app) {//adiciona para um middleware um regitro referente a uma aplicação
         boolean test = false;
 
         for (ServidorDadosMD registro : istanciasMD) {
@@ -61,7 +63,7 @@ public class ServidorRegistro {
         }
     }
 
-    public void removerApp(ServidorDadosMD MD, ServidorDadosApp app) {
+    public void removerApp(ServidorDadosMD MD, ServidorDadosApp app) {//remove o registro referente a uma aplicação
         boolean test = false;
 
         for (ServidorDadosMD registro : istanciasMD) {
@@ -83,7 +85,7 @@ public class ServidorRegistro {
         }
     }
     
-    public void mudarValidade(ServidorDadosMD MD, boolean validade) {
+    public void mudarValidade(ServidorDadosMD MD, boolean validade) {//atualiza o tempo em que a instancia do middleware se comunicou com o servidor de estados, para saber se esta ativa ou não
     
 
         for (ServidorDadosMD registro : istanciasMD) {
@@ -97,7 +99,7 @@ public class ServidorRegistro {
 
     }
 
-    public ArrayList<ServidorDadosMD> getIstanciasMD() {
+    public ArrayList<ServidorDadosMD> getIstanciasMD() {//retorna uma lista com as instancias do middleware que estão registradas
         return istanciasMD;
     }
 
