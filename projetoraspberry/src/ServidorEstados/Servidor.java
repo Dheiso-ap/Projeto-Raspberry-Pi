@@ -16,8 +16,8 @@ public class Servidor {
     public static void main(String args[]) throws IOException {
 
         ServerSocket servidor = new ServerSocket(54321);//Abre um socket para receber conexões na porta 54321.
-        ServidorNewThread threadInicial = new ServidorNewThread(null, false);
-        threadInicial.registro = new ServidorRegistro();
+        ServidorNewThread threadInicial = new ServidorNewThread(null, false);//instancia a classe que implementa uma thread responsavel por receber as requisições
+        threadInicial.registro = new ServidorRegistro();//instancia a classe responsavel por guardar todas as informações de registros
         Thread thread = new Thread(threadInicial);
         thread.start();
         System.out.println("Servidor de Estados Ativo...");
