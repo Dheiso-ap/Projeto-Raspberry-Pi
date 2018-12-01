@@ -13,12 +13,12 @@ import java.util.logging.Logger;
  */
 public class ServidorThreadHandoff extends Thread {
     
-    private ServidorDadosMD registro;
-    private ServidorDadosHandoff dadosHandoff = new ServidorDadosHandoff();
-    private String ipRegistrador = "localhost";
-    private int portaRegistrador = 12345;
-    private String dados;
-    private boolean tipoResposta;
+    private ServidorDadosMD registro;//este objeto guarda as informaçes da instancia do middleware que aparentemente falhou
+    private ServidorDadosHandoff dadosHandoff = new ServidorDadosHandoff();//objeto que guarda as informações de um candidato a receber o handoff
+    private String ipRegistrador = "localhost";//ip do Registrador
+    private int portaRegistrador = 12345;//porta do registrador
+    private String dados;// para receber uma string serializada json com o estado da aplicação que sera transferida
+    private boolean tipoResposta;//variavel usada para verificar se o registrador retorna uma resposta com informações de um candidato a receber o handoff, ou se não tem candidato
     private int teste = 0;//este atributo é usado para que a classe que instanciou essa classe saiba se se o registro foi verificado e sua condição
     
     public ServidorThreadHandoff(ServidorDadosMD registro) {
@@ -26,7 +26,7 @@ public class ServidorThreadHandoff extends Thread {
     }
     
     @Override
-    public void run() {
+    public void run() {//thread que executa o processo de verificação da falha de uma instancia do middleware e realiza o handoff se nescessario
         
         if (!verifica()) {
             
@@ -50,7 +50,7 @@ public class ServidorThreadHandoff extends Thread {
         
     }
     
-    public void handoff(int tipoId, String estado) {
+    public void handoff(int tipoId, String estado) {//manda para o candidato a receber o handoff o tipo da aplicação e o estado da mesma
         
         Socket cliente;
         try {
@@ -67,7 +67,7 @@ public class ServidorThreadHandoff extends Thread {
         
     }
     
-    public boolean verifica() {
+    public boolean verifica() {//verifica se uma instancia do middleware parou
         
         try {
             Socket cliente = new Socket(registro.getIpMD(), registro.getPortaMD());
@@ -90,7 +90,7 @@ public class ServidorThreadHandoff extends Thread {
         
     }
     
-    public void solicitar() {
+    public void solicitar() {//solicita um candidato a receber o handoff
         
         try {
             Socket cliente = new Socket(ipRegistrador, portaRegistrador);
@@ -116,7 +116,7 @@ public class ServidorThreadHandoff extends Thread {
         
     }
     
-    public void removerRegistroRegistrador() {
+    public void removerRegistroRegistrador() {//solicita que o registrador remova o registro do middleware que parou de funcionar
         
         try {
             Socket cliente = new Socket(ipRegistrador, portaRegistrador);
@@ -133,7 +133,7 @@ public class ServidorThreadHandoff extends Thread {
         
     }
     
-    public int retornaValorDaVerificacao(){
+    public int retornaValorDaVerificacao(){//retorna para o o servidoNewThread que o registro realmente falhou
         return teste;
     }
     
