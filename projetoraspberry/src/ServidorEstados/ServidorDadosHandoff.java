@@ -5,6 +5,10 @@ package ServidorEstados;
  *
  * @author Dheiso
  */
+
+/*
+Esta classe guarda as informaços necessaria de um candidato à receber handoff
+*/
 public class ServidorDadosHandoff {
     
     
