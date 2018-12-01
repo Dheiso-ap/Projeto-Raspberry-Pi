@@ -13,6 +13,11 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/*esta classe funciona de duas maneiras ela irá executar uma thread em ambos os casos,
+ela pode executar uma thread que fica verificando se alguma instancia do middleware parou de funcionar, ou
+executa uma thread para atender um dos três tipos de requisições, registrar um middleware, registra um app em um middlware ou
+remover o registro de um app.
+*/
 public class ServidorNewThread extends Thread {
 
     static ServidorRegistro registro;
@@ -32,7 +37,7 @@ public class ServidorNewThread extends Thread {
     @Override
     public void run() {
 
-        if (tipoTrabalho == false) {
+        if (tipoTrabalho == false) {//primeiro caso, verificar se um middleware está funcionando, se não estiver realiza o handoff
             int calculo;
             int minAtual;
             int segundoAtual;
@@ -67,14 +72,14 @@ public class ServidorNewThread extends Thread {
                         }
                     }
 
-                    if (calculo >= 60 && !rgt.isEmpty()) {
-                        ServidorThreadHandoff handoff = new ServidorThreadHandoff(rgt);
+                    if (calculo >= 60 && !rgt.isEmpty()) {//realizar o handoff no caso de detectar se um dispositivo parou.
+                        ServidorThreadHandoff handoff = new ServidorThreadHandoff(rgt);//inicia uma thread que realiza o handoff
                         Thread thread = new Thread(handoff);
                         thread.start();
 
                         boolean teste = true;
 
-                        while (teste) {
+                        while (teste) {//tenta remover o registro do middleware
                             switch (handoff.retornaValorDaVerificacao()) {
                                 case 1:
                                     this.registro.removerMD(rgt);
